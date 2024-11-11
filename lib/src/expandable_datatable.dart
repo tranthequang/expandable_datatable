@@ -54,6 +54,8 @@ class ExpandableDataTable extends StatefulWidget {
   /// It defaults to true.
   final bool multipleExpansion;
 
+  final bool shrinkWrap;
+
   /// Flag indicating whether the rows are editable.
   /// If this value is false, renderEditDialog does not affect.
   ///
@@ -169,6 +171,7 @@ class ExpandableDataTable extends StatefulWidget {
     this.renderEditDialog,
     this.renderCustomPagination,
     this.renderExpansionContent,
+    this.shrinkWrap = false,
   })  : assert(visibleColumnCount > 0),
         assert(
           rows.isNotEmpty ? headers.length == rows.first.cells.length : true,
@@ -360,6 +363,7 @@ class _ExpandableDataTableState extends State<ExpandableDataTable> {
     return Scrollbar(
       controller: _scrollController,
       child: ListView.builder(
+        shrinkWrap: widget.shrinkWrap,
         controller: _scrollController,
         itemCount: pageLength,
         itemBuilder: (context, index) {
